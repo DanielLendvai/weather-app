@@ -1,33 +1,61 @@
 const rootElement = document.querySelector("#root");
-rootElement.insertAdjacentHTML("beforeend", `
-<h1 class="cityName">Buda</h1>
-<form id="locationInput">
-<input class="search"></input>
+rootElement.insertAdjacentHTML(
+    "beforeend",
+    `
+<h1 class="city-name"></h1>
+<input type="text" class="city-name-input">
+<datalist class="country-list">
+</datalist>
 <button></button>
-</form>
-`);
+`
+);
+const cityName = document.querySelector(".city-name");
+const cityNameInput = document.querySelector(".city-name-input");
+const btn = document.querySelector("button");
+const dataList = document.querySelector("datalist");
 
+let cityNames = [];
 
-let cityInput = "Buda";
+/* function fetchWeatherData() {
+    fetch(
+        `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${cityInput}`,
+        {
+            Connection: "keep-alive",
+            Vary: "Accept-Encoding",
+            "Content-Length": "2334",
+            "Content-Type": "text/html",
+            Date: "Mon, 17 Oct 2022 08:16:41 GMT",
+        }
+    )
+        .then((response) => response.json())
+        .then((data) => {})
+        .catch(() => {});
+} */
+cityNameInput.addEventListener("input", (e) => {
+    fetch(
+        `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${e.target.value}`,
+        {
+            Connection: "keep-alive",
+            Vary: "Accept-Encoding",
+            "Content-Length": "2334",
+            "Content-Type": "text/html",
+            Date: "Mon, 17 Oct 2022 08:16:41 GMT",
+        }
+    )
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((c) => {
+            if(!cityNames.includes(c)) {
+              cityNames.push(c)
+            }
+          })
+            /* for (let i = 0; i < data.length; i++) {
+                if (!cityNames.includes(data[i].name)) 
+                cityNames.push(data[i]);
+            } */
 
-function fetchWeatherData() {
-    // fetch(`http://api.weatherapi.com/v1/current.json?key=cbdf271152ea4bd5bf3162430221510&q=${cityInput}`)
-  //  http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710q=London
-    fetch(`http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=Buda`, {
-        "Connection": "keep-alive",
-        "Vary": "Accept-Encoding",
-        "Content-Length": "2334",
-        "Content-Type": "text/html",
-        "Date": "Mon, 17 Oct 2022 08:16:41 GMT"
-      })
-     //
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        cityName.innerHTML = data.location.name;
-    })
-    .catch(() => {
-
-    });
-    }
-fetchWeatherData(); /*függvény meghívás page load-on*/
+        })
+        .catch(() => {});
+    cityName.textContent = e.target.value;
+    console.log(cityNames);
+});
