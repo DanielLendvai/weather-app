@@ -1,18 +1,15 @@
 const rootElement = document.querySelector("#root");
 rootElement.insertAdjacentHTML("beforeend", `
-<h1 class="cityName">Buda</h1>
+<h1 class="cityName"></h1>
 <form id="locationInput">
-<input class="search"></input>
-<button></button>
+<input class="search" placeholder="city name" ></input>
+<button class="search-button">Search</button>
 </form>
 `);
 
 
-let cityInput = "Buda";
 
 function fetchWeatherData() {
-    // fetch(`http://api.weatherapi.com/v1/current.json?key=cbdf271152ea4bd5bf3162430221510&q=${cityInput}`)
-  //  http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710q=London
     fetch(`http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=Buda`, {
         "Connection": "keep-alive",
         "Vary": "Accept-Encoding",

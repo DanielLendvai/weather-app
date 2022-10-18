@@ -1,1 +1,31 @@
-/*# sourceMappingURL=style.css.map */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#root #locationInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#root #locationInput .search-button {
+  color: white;
+  font-size: 20px;
+  margin-left: 10px;
+  width: 75px;
+  height: 35px;
+  background-color: green;
+  border: none;
+}
+#root #locationInput .search {
+  text-align: start;
+  padding-left: 5px;
+  font-size: 20px;
+}/*# sourceMappingURL=style.css.map */
