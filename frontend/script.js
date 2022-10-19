@@ -80,19 +80,10 @@ btn.addEventListener("click", () => {
   )
     .then((response) => response.json())
     .then((data) => {
-      temperature.insertAdjacentHTML(
-        "beforeend",
-        `<p>${data.current.temp_c}</p>`
-      );
-      humidity.insertAdjacentHTML(
-        "beforeend",
-        `<p>${data.current.humidity}</p>`
-      );
-      rain.insertAdjacentHTML(
-        "beforeend",
-        `<p>${data.current.condition.text}</p>`
-      );
-      wind.insertAdjacentHTML("beforeend", `<p>${data.current.wind_kph}</p>`);
+      temperature.textContent = data.current.temp_c;
+      humidity.textContent = data.current.humidity;
+      rain.textContent = data.current.condition.text;
+      wind.textContent = data.current.wind_kph;
     });
 });
 
