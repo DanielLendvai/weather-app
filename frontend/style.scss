@@ -9,7 +9,7 @@
   .container {
     background-color: #4d648d;
     width: 60%;
-    height: 96vh;
+    height: 96%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,49 +18,52 @@
 
     .input {
       width: 30%;
-      height: 15vh;
+      height: 20%;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       border-radius: 10px;
       background-color: white;
-      margin-bottom: 5vh;
+      margin-bottom: 5%;
+      label {
+        margin: 10px 0 10px 0;
+      }
 
       button {
         width: 50%;
-        height: 5vh;
+        height: 30%;
         color: #4d648d;
-        font-size: 20px;
+        font-size: 80%;
         margin-bottom: 1vh;
+        border-radius: 5px;
       }
-
       input {
         width: 50%;
-        height: 2vh;
-        padding: 5px;
+        height: 10%;
+        padding: 10px;
         border-radius: 5px;
         color: #4d648d;
-        font-size: 20px;
+        font-size: 80%;
         background-color: #edf1f4;
         margin-bottom: 3vh;
       }
     }
 
-    .city {
+    .city-name {
       width: 30%;
-      height: 5vh;
+      height: 5%;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 10px;
       background-color: white;
-      margin-bottom: 5vh;
+      margin-bottom: 5%;
     }
 
     .datas {
       width: 80%;
-      height: 50vh;
+      height: 50%;
       background-color: #283655;
       display: flex;
       justify-content: space-between;
@@ -70,59 +73,60 @@
 
       .first-row {
         width: 80%;
-        height: 20vh;
+        height: 50%;
         display: flex;
         justify-content: space-between;
         align-items: center;
 
         .temperature {
           width: 45%;
-          height: 20vh;
+          height: 80%;
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: white;
-          margin-top: 10%;
+          margin-top: 2%;
           border-radius: 10px;
         }
 
-        .wind {
+        .humidity {
           width: 45%;
-          height: 20vh;
+          height: 80%;
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: white;
-          margin-top: 10%;
+          margin-top: 2%;
           border-radius: 10px;
         }
       }
+
       .second-row {
         width: 80%;
-        height: 20vh;
+        height: 50%;
         display: flex;
         justify-content: space-between;
         align-items: center;
 
         .rain {
           width: 45%;
-          height: 20vh;
+          height: 80%;
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: white;
-          margin-bottom: 10%;
+          margin-bottom: 2%;
           border-radius: 10px;
         }
 
-        .humidity {
+        .wind {
           width: 45%;
-          height: 20vh;
+          height: 80%;
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: white;
-          margin-bottom: 10%;
+          margin-bottom: 2%;
           border-radius: 10px;
         }
       }
