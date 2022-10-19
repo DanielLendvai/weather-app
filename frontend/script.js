@@ -52,20 +52,20 @@ const options = document.querySelectorAll("option");
 const temperature = document.querySelector(".temperature p");
 const humidity = document.querySelector(".humidity p");
 const rain = document.querySelector(".rain p");
-const rainIcon = document.querySelector(".rain img")
+const rainIcon = document.querySelector(".rain img");
 const wind = document.querySelector(".wind p");
 
 cityNameInput.addEventListener("input", (e) => {
     cityNames = [];
     fetch(
-        `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${e.target.value}`
-        // {
-        //   Connection: "keep-alive",
-        //   Vary: "Accept-Encoding",
-        //   "Content-Length": "2334",
-        //   "Content-Type": "text/html",
-        //   Date: "Mon, 17 Oct 2022 08:16:41 GMT",
-        // }
+        `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${e.target.value}`,
+        {
+            Connection: "keep-alive",
+            Vary: "Accept-Encoding",
+            "Content-Length": "2334",
+            "Content-Type": "text/html",
+            Date: "Mon, 17 Oct 2022 08:16:41 GMT",
+        }
     )
         .then((response) => response.json())
         .then((data) => {
@@ -82,10 +82,15 @@ let inputValue = document.querySelector("#cityInput");
 const spinner = document.getElementById("spinner");
 
 btn.addEventListener("click", () => {
+    temperature.textContent = "";
+    humidity.textContent = "";
+    rain.textContent = "";
+    wind.textContent = "";
+    rainIcon.src = "";
     spinner.removeAttribute("hidden");
     fetch("https://www.mocky.io/v2/5185415ba171ea3a00704eed?mocky-delay=1200ms")
         .then((response) => response.json())
-        .then((data) => {
+        .then(() => {
             spinner.setAttribute("hidden", "");
         });
     setTimeout(() => {
@@ -95,14 +100,26 @@ btn.addEventListener("click", () => {
             .then((response) => response.json())
             .then((data) => {
                 temperature.textContent = data.current.temp_c + " °C";
-                humidity.textContent = data.current.humidity + " %"; 
+                humidity.textContent = data.current.humidity + " %";
                 rain.textContent = data.current.condition.text;
-                rainIcon.src = data.current.condition.icon; 
+                rainIcon.src = data.current.condition.icon;
                 wind.textContent = data.current.wind_kph + " km/h";
-                cityName.textContent = data.location.name + " - " + data.location.localtime.slice(0, 20);
+                cityName.textContent =
+                    data.location.name + " - " + data.location.region;
                 console.log(data);
             });
-    }, "1200");
+    }, "1300");
+    fetch("https://api.pexels.com/v1/search?query=people", {
+        headers: {
+            Authorization: "563492ad6f91700001000001c2eb3b77f1ff41a1b1c542caf05a8f4d",
+        },
+    })
+        .then((resp) => {
+            return resp.json();
+        })
+        .then((data) => {
+            console.log(data);
+        });
 });
 
 function fillOptions() {
@@ -111,9 +128,6 @@ function fillOptions() {
             options[0].value = cityNames[0].name;
             options[1].value = cityNames[1].name;
             options[2].value = cityNames[2].name;
-            options[3].value = cityNames[3].name;
-            options[4].value = cityNames[4].name;
-            options[5].value = cityNames[5].name;
         }
     }, "1000");
 }
