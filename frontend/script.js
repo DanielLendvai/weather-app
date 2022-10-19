@@ -24,14 +24,18 @@ rootElement.insertAdjacentHTML(
   <div class="datas">
     <div class="first-row">
       <div class="temperature">
+      <p></p>
       </div>
       <div class="humidity">
+      <p></p>
       </div>
     </div>
     <div class="second-row">
       <div class="rain">
+      <p></p>
       </div>
       <div class="wind">
+      <p></p>
       </div>
     </div>
   </div>
@@ -43,10 +47,10 @@ const cityNameInput = document.querySelector("#cityInput");
 const btn = document.querySelector("#searchButton");
 const dataList = document.querySelector("datalist");
 const options = document.querySelectorAll("option");
-const temperature = document.querySelector(".temperature");
-const humidity = document.querySelector(".humidity");
-const rain = document.querySelector(".rain");
-const wind = document.querySelector(".wind");
+const temperature = document.querySelector(".temperature p");
+const humidity = document.querySelector(".humidity p");
+const rain = document.querySelector(".rain p");
+const wind = document.querySelector(".wind p");
 
 cityNameInput.addEventListener("input", (e) => {
   cityNames = [];
