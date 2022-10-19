@@ -4,9 +4,10 @@ let cityNames = [];
 //input change method, add timeout, clear the array, datalist-> https://www.w3schools.com/tags/tag_datalist.asp
 
 rootElement.insertAdjacentHTML(
-  "beforeend",
-  `
+    "beforeend",
+    `
   <div class="container">
+  <div hidden id="spinner"></div>
   <div class="input">
     <label for="">See the weather in...</label>
     <input placeholder="Start typing" type="text" list="cities" name="city" id="cityInput" value=""/>
@@ -33,6 +34,7 @@ rootElement.insertAdjacentHTML(
     <div class="second-row">
       <div class="rain">
       <p></p>
+      <img src=""/>
       </div>
       <div class="wind">
       <p></p>
@@ -50,56 +52,68 @@ const options = document.querySelectorAll("option");
 const temperature = document.querySelector(".temperature p");
 const humidity = document.querySelector(".humidity p");
 const rain = document.querySelector(".rain p");
+const rainIcon = document.querySelector(".rain img")
 const wind = document.querySelector(".wind p");
 
 cityNameInput.addEventListener("input", (e) => {
-  cityNames = [];
-  fetch(
-    `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${e.target.value}`
-    // {
-    //   Connection: "keep-alive",
-    //   Vary: "Accept-Encoding",
-    //   "Content-Length": "2334",
-    //   "Content-Type": "text/html",
-    //   Date: "Mon, 17 Oct 2022 08:16:41 GMT",
-    // }
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((l) => {
-        cityNames.push(l);
-      });
-    })
-    .catch(() => {});
-
-  cityName.textContent = e.target.value;
-  fillOptions();
+    cityNames = [];
+    fetch(
+        `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${e.target.value}`
+        // {
+        //   Connection: "keep-alive",
+        //   Vary: "Accept-Encoding",
+        //   "Content-Length": "2334",
+        //   "Content-Type": "text/html",
+        //   Date: "Mon, 17 Oct 2022 08:16:41 GMT",
+        // }
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            data.forEach((l) => {
+                cityNames.push(l);
+            });
+        })
+        .catch(() => {});
+    cityName.textContent = e.target.value;
+    fillOptions();
 });
 
 let inputValue = document.querySelector("#cityInput");
+const spinner = document.getElementById("spinner");
 
 btn.addEventListener("click", () => {
-  fetch(
-    `http://api.weatherapi.com/v1/current.json?key=c03e30c3acf1486cb5674845221710&q=${inputValue.value}&aqi=no`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      temperature.textContent = data.current.temp_c;
-      humidity.textContent = data.current.humidity;
-      rain.textContent = data.current.condition.text;
-      wind.textContent = data.current.wind_kph;
-    });
+    spinner.removeAttribute("hidden");
+    fetch("https://www.mocky.io/v2/5185415ba171ea3a00704eed?mocky-delay=1200ms")
+        .then((response) => response.json())
+        .then((data) => {
+            spinner.setAttribute("hidden", "");
+        });
+    setTimeout(() => {
+        fetch(
+            `http://api.weatherapi.com/v1/current.json?key=c03e30c3acf1486cb5674845221710&q=${inputValue.value}&aqi=no`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                temperature.textContent = data.current.temp_c + " °C";
+                humidity.textContent = data.current.humidity + " %"; 
+                rain.textContent = data.current.condition.text;
+                rainIcon.src = data.current.condition.icon; 
+                wind.textContent = data.current.wind_kph + " km/h";
+                cityName.textContent = data.location.name + " - " + data.location.localtime.slice(0, 20);
+                console.log(data);
+            });
+    }, "1200");
 });
 
 function fillOptions() {
-  setTimeout(() => {
-    for (let i = 0; i < options.length; i++) {
-      options[0].value = cityNames[0].name;
-      options[1].value = cityNames[1].name;
-      options[2].value = cityNames[2].name;
-      options[3].value = cityNames[3].name;
-      options[4].value = cityNames[4].name;
-      options[5].value = cityNames[5].name;
-    }
-  }, "1000");
+    setTimeout(() => {
+        for (let i = 0; i < options.length; i++) {
+            options[0].value = cityNames[0].name;
+            options[1].value = cityNames[1].name;
+            options[2].value = cityNames[2].name;
+            options[3].value = cityNames[3].name;
+            options[4].value = cityNames[4].name;
+            options[5].value = cityNames[5].name;
+        }
+    }, "1000");
 }

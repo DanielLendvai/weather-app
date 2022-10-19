@@ -16,6 +16,43 @@
   flex-direction: column;
   border-radius: 10px;
 }
+#root .container #spinner:not([hidden]) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#root .container #spinner::after {
+  content: "";
+  width: 150px;
+  height: 150px;
+  border: 2px solid #f3f3f3;
+  border-top: 3px groove #283655;
+  border-radius: 100%;
+  will-change: transform;
+  -webkit-animation: spin 0.4s infinite linear;
+          animation: spin 0.4s infinite linear;
+}
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 #root .container .input {
   width: 30%;
   height: 20%;
