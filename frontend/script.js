@@ -1,5 +1,6 @@
 const rootElement = document.querySelector("#root");
 let cityNames = [];
+let cityImages = [];
 
 //input change method, add timeout, clear the array, datalist-> https://www.w3schools.com/tags/tag_datalist.asp
 
@@ -54,6 +55,7 @@ const humidity = document.querySelector(".humidity p");
 const rain = document.querySelector(".rain p");
 const rainIcon = document.querySelector(".rain img");
 const wind = document.querySelector(".wind p");
+const background = document.querySelector(".container ")
 
 cityNameInput.addEventListener("input", (e) => {
     cityNames = [];
@@ -82,12 +84,30 @@ let inputValue = document.querySelector("#cityInput");
 const spinner = document.getElementById("spinner");
 
 btn.addEventListener("click", () => {
+    setTimeout(() => { 
+        cityImages = [];
+        fetch(`https://api.pexels.com/v1/search?query=${rain.textContent}`, {
+            headers: {
+                Authorization: "563492ad6f91700001000001c2eb3b77f1ff41a1b1c542caf05a8f4d",
+            },
+        })
+            .then((resp) => {
+                return resp.json();
+            })
+            .then((data) => {
+                cityImages.push(data.photos)
+                console.log(cityImages)
+            });
+
+    }, "1400")
+
     temperature.textContent = "";
     humidity.textContent = "";
     rain.textContent = "";
     wind.textContent = "";
     rainIcon.src = "";
     spinner.removeAttribute("hidden");
+
     fetch("https://www.mocky.io/v2/5185415ba171ea3a00704eed?mocky-delay=1200ms")
         .then((response) => response.json())
         .then(() => {
@@ -105,21 +125,11 @@ btn.addEventListener("click", () => {
                 rainIcon.src = data.current.condition.icon;
                 wind.textContent = data.current.wind_kph + " km/h";
                 cityName.textContent =
-                    data.location.name + " - " + data.location.region;
+                data.location.name + " - " + data.location.region;
                 console.log(data);
             });
     }, "1300");
-    fetch("https://api.pexels.com/v1/search?query=people", {
-        headers: {
-            Authorization: "563492ad6f91700001000001c2eb3b77f1ff41a1b1c542caf05a8f4d",
-        },
-    })
-        .then((resp) => {
-            return resp.json();
-        })
-        .then((data) => {
-            console.log(data);
-        });
+    
 });
 
 function fillOptions() {
