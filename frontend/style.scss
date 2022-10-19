@@ -15,6 +15,9 @@
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 
     #spinner:not([hidden]) {
       position: fixed;
@@ -57,8 +60,11 @@
       border-radius: 10px;
       background-color: white;
       margin-bottom: 5%;
+      opacity: 0.8;
+
       label {
         margin: 10px 0 10px 0;
+        font-weight: bold;
       }
 
       button {
@@ -90,6 +96,8 @@
       border-radius: 10px;
       background-color: white;
       margin-bottom: 5%;
+      font-size: larger;
+      opacity: 0.8;
     }
 
     .datas {
@@ -101,6 +109,7 @@
       align-items: center;
       flex-direction: column;
       border-radius: 10px;
+      opacity: 0.8;
 
       .first-row {
         width: 80%;
