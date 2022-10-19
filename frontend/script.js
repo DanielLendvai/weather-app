@@ -86,7 +86,7 @@ const spinner = document.getElementById("spinner");
 btn.addEventListener("click", () => {
     setTimeout(() => { 
         cityImages = [];
-        fetch(`https://api.pexels.com/v1/search?query=${rain.textContent}`, {
+        fetch(`https://api.pexels.com/v1/search?query=${cityName.textContent} city`, {
             headers: {
                 Authorization: "563492ad6f91700001000001c2eb3b77f1ff41a1b1c542caf05a8f4d",
             },
@@ -96,10 +96,9 @@ btn.addEventListener("click", () => {
             })
             .then((data) => {
                 cityImages.push(data.photos)
-                console.log(cityImages)
+                console.log(cityImages[0][2].src.original)
             });
-
-    }, "1400")
+    }, "1600")
 
     temperature.textContent = "";
     humidity.textContent = "";
