@@ -15,6 +15,9 @@
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 #root .container #spinner:not([hidden]) {
   position: fixed;
@@ -63,9 +66,11 @@
   border-radius: 10px;
   background-color: white;
   margin-bottom: 5%;
+  opacity: 0.8;
 }
 #root .container .input label {
   margin: 10px 0 10px 0;
+  font-weight: bold;
 }
 #root .container .input button {
   width: 50%;
@@ -94,6 +99,8 @@
   border-radius: 10px;
   background-color: white;
   margin-bottom: 5%;
+  font-size: larger;
+  opacity: 0.8;
 }
 #root .container .datas {
   width: 80%;
@@ -104,6 +111,7 @@
   align-items: center;
   flex-direction: column;
   border-radius: 10px;
+  opacity: 0.8;
 }
 #root .container .datas .first-row {
   width: 80%;
