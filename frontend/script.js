@@ -55,6 +55,7 @@ const humidity = document.querySelector(".humidity p");
 const rain = document.querySelector(".rain p");
 const rainIcon = document.querySelector(".rain img");
 const wind = document.querySelector(".wind p");
+const container = document.querySelector(".container")
 
 cityNameInput.addEventListener("input", (e) => {
     cityNames = [];
