@@ -8,7 +8,6 @@ rootElement.insertAdjacentHTML(
   "beforeend",
   `
   <div class="container">
-  <div hidden id="spinner"></div>
   <div class="input">
     <label for="">See the weather in...</label>
     <input placeholder="Start typing" type="text" list="cities" name="city" id="cityInput" value=""/>
@@ -48,7 +47,8 @@ rootElement.insertAdjacentHTML(
       </div>
     </div>
   </div>
-</div>
+  <div hidden id="spinner"></div>
+  </div>
 `
 );
 const cityName = document.querySelector(".city-name");
