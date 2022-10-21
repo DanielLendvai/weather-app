@@ -62,32 +62,36 @@ const rain = document.querySelector(".rain p");
 const rainIcon = document.querySelector(".rain img");
 const wind = document.querySelector(".wind p");
 const app = document.querySelector(".container");
-setTimeout(() => {
+let timeout = null;
 
-  cityNameInput.addEventListener("input", (e) => {
-    cityNames = [];
-    fetch(
-      `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${e.target.value}`,
-      {
-        Connection: "keep-alive",
-        Vary: "Accept-Encoding",
-        "Content-Length": "2334",
-        "Content-Type": "text/html",
-        Date: "Mon, 17 Oct 2022 08:16:41 GMT",
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        data.forEach((l) => {
-          cityNames.push(l);
-        });
-      })
-      .catch(() => {});
-    cityName.textContent = e.target.value;
-    fillOptions();
-  });
+cityNameInput.addEventListener("keyup", (e) => {
+  cityNames = [];
+  clearTimeout(timeout);
+    // Make a new timeout set to go off in 1000ms (1 second)
+    timeout = setTimeout(function () {
+      fetch(
+        `http://api.weatherapi.com/v1/search.json?key=c03e30c3acf1486cb5674845221710&q=${e.target.value}`,
+        {
+          Connection: "keep-alive",
+          Vary: "Accept-Encoding",
+          "Content-Length": "2334",
+          "Content-Type": "text/html",
+          Date: "Mon, 17 Oct 2022 08:16:41 GMT",
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((l) => {
+            cityNames.push(l);
+          });
+        })
+        .catch(() => {});
+      cityName.textContent = e.target.value;
+      fillOptions();
 
-}, "1500")
+    }, 1000);
+    
+});
 
 let inputValue = document.querySelector("#cityInput");
 const spinner = document.getElementById("spinner");
